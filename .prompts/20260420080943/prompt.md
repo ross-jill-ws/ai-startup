@@ -1,0 +1,1 @@
+For all `node` command, please use `node22` prefix. the default versions of node is 18
