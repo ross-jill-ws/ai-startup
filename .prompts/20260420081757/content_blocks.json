@@ -1,0 +1,6 @@
+[
+  {
+    "type": "text",
+    "text": "It's in ~/.cloudflare/rj-web-solution-shared. Please also update skill file /Users/rossz/.claude/skills/cloudflare-react-router/SKILL.md to mention this:\\\nBefore doing anything, first check the list, if there's anything missing then quit immediately with info what is missing.\n- ~/.cloudflare/rj-web-solution-shared\n- `gh` command quick test\n- if github cicd is enabled?\n- other requirement tests"
+  }
+]
