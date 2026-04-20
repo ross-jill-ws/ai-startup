@@ -16,6 +16,9 @@ export default function Home() {
       <p style={{ fontSize: "1.25rem", color: "#666" }}>
         Running on Cloudflare Workers
       </p>
+      <a href="/counter" style={{ display: "inline-block", marginTop: "2rem", fontSize: "1rem", color: "#f6821f" }}>
+        → Try the Counter Agent demo
+      </a>
     </main>
   );
 }

@@ -1,0 +1,1 @@
+Fix `justfile`, list-runs reciepe: the last part shouldn't be `hsc-math`, but the basename of the current repo folder

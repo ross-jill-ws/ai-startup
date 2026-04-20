@@ -1,0 +1,1 @@
+Create a document in ./documents folder on step by step guide on how to create an AI gateway and do a simple demo using our existing worker

@@ -1,0 +1,2 @@
+Already read it. The edit failed because the file was read via Bash, not the Read tool. Let me use Read first:
+Fixed. `list-runs` now uses `$(basename $(pwd))` so it always targets the current repo regardless of folder name.
