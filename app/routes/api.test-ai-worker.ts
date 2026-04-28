@@ -7,6 +7,10 @@ type GatewayMessage = {
   content: string;
 };
 
+type GatewayEnv = Env & {
+  CF_AIG_TOKEN?: string;
+};
+
 const MODEL = "workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const MAX_MESSAGES = 20;
 const MAX_CONTENT_LENGTH = 4_000;
@@ -19,7 +23,7 @@ export async function loader() {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  const { env } = context.cloudflare;
+  const env = context.cloudflare.env as GatewayEnv;
 
   if (!env.CF_AIG_TOKEN) {
     return Response.json(

@@ -33,7 +33,10 @@ export default function ChatAgentRoute() {
     status,
     error,
     isStreaming,
-  } = useAgentChat({ agent });
+  } = useAgentChat({
+    agent,
+    getInitialMessages: getInitialMessagesSafely,
+  });
 
   function submitMessage(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -184,6 +187,31 @@ export default function ChatAgentRoute() {
       </div>
     </main>
   );
+}
+
+async function getInitialMessagesSafely({ url }: { url?: string }) {
+  if (!url || typeof window === "undefined") return [];
+
+  try {
+    const getMessagesUrl = new URL(url);
+    getMessagesUrl.pathname += "/get-messages";
+
+    const response = await fetch(getMessagesUrl.toString());
+    if (!response.ok) {
+      console.warn(
+        `Failed to fetch initial ChatAgent messages: ${response.status} ${response.statusText}`,
+      );
+      return [];
+    }
+
+    const text = await response.text();
+    if (!text.trim()) return [];
+
+    return JSON.parse(text) as UIMessage[];
+  } catch (error) {
+    console.warn("Failed to fetch initial ChatAgent messages:", error);
+    return [];
+  }
 }
 
 function MessageBubble({ message }: { message: UIMessage }) {
