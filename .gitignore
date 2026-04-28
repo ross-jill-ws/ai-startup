@@ -9,3 +9,5 @@
 # Cloudflare
 .dev.vars
 .wrangler/
+.pi
+.prompts

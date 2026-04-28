@@ -1,9 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ai-startup",
+  "account_id": "c336fa03613cb6253dcdf6941872f343",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./workers/app.ts",
+  "vars": {
+    "AI_GATEWAY_ACCOUNT_ID": "c336fa03613cb6253dcdf6941872f343",
+    "AI_GATEWAY_ID": "default"
+  },
+  "ai": {
+    "binding": "AI"
+  },
   "observability": {
     "enabled": true
   },
@@ -12,6 +20,10 @@
       {
         "name": "CounterAgent",
         "class_name": "CounterAgent"
+      },
+      {
+        "name": "ChatAgent",
+        "class_name": "ChatAgent"
       }
     ]
   },
@@ -19,6 +31,10 @@
     {
       "tag": "v1",
       "new_sqlite_classes": ["CounterAgent"]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": ["ChatAgent"]
     }
   ]
 }

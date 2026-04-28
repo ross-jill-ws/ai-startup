@@ -2,6 +2,7 @@ import { createRequestHandler } from "react-router";
 import { routeAgentRequest } from "agents";
 
 export { CounterAgent } from "./agent";
+export { ChatAgent } from "./chat-agent";
 
 declare module "react-router" {
   export interface AppLoadContext {

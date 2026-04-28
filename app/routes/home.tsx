@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -16,9 +18,17 @@ export default function Home() {
       <p style={{ fontSize: "1.25rem", color: "#666" }}>
         Running on Cloudflare Workers
       </p>
-      <a href="/counter" style={{ display: "inline-block", marginTop: "2rem", fontSize: "1rem", color: "#f6821f" }}>
-        → Try the Counter Agent demo
-      </a>
+      <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginTop: "2rem" }}>
+        <Link to="/counter" style={{ fontSize: "1rem", color: "#f6821f" }}>
+          → Try the Counter Agent demo
+        </Link>
+        <Link to="/chat-agent" style={{ fontSize: "1rem", color: "#a855f7" }}>
+          → Chat with the LLM-backed Agent
+        </Link>
+        <Link to="/test-ai-worker" style={{ fontSize: "1rem", color: "#0ea5e9" }}>
+          → Open the streaming AI chat demo
+        </Link>
+      </div>
     </main>
   );
 }
