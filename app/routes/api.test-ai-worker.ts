@@ -1,3 +1,4 @@
+import { requireUser } from "~/lib/auth.server";
 import type { Route } from "./+types/api.test-ai-worker";
 
 type ChatRole = "system" | "user" | "assistant";
@@ -23,6 +24,7 @@ export async function loader() {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
+  await requireUser(request, context.cloudflare.env);
   const env = context.cloudflare.env as GatewayEnv;
 
   if (!env.CF_AIG_TOKEN) {

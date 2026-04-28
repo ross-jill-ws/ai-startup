@@ -28,6 +28,9 @@ export default function Home() {
         <Link to="/test-ai-worker" style={{ fontSize: "1rem", color: "#0ea5e9" }}>
           → Open the streaming AI chat demo
         </Link>
+        <Link to="/logout" style={{ fontSize: "1rem", color: "#dc2626" }}>
+          Sign out
+        </Link>
       </div>
     </main>
   );

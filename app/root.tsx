@@ -1,6 +1,7 @@
 import {
   isRouteErrorResponse,
   Links,
+  redirect,
   Meta,
   Outlet,
   Scripts,
@@ -8,6 +9,7 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { getUser, isAuthPublicPath } from "~/lib/auth.server";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -39,6 +41,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
+}
+
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+
+  if (isAuthPublicPath(url.pathname)) {
+    return { user: null };
+  }
+
+  const user = await getUser(request, context.cloudflare.env);
+  if (!user) {
+    throw redirect(
+      `/login?next=${encodeURIComponent(`${url.pathname}${url.search}`)}`,
+      302,
+    );
+  }
+
+  return { user };
 }
 
 export default function App() {

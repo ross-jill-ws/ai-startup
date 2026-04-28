@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { useAgent } from "agents/react";
 import { useAgentChat } from "@cloudflare/ai-chat/react";
 import type { UIMessage } from "ai";
 
+import { getChatAgentName, requireUser } from "~/lib/auth.server";
 import type { Route } from "./+types/chat-agent";
 
 const QUICK_PROMPTS = [
@@ -22,9 +23,17 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const user = await requireUser(request, context.cloudflare.env);
+  const chatAgentName = await getChatAgentName(user, context.cloudflare.env);
+
+  return { user, chatAgentName };
+}
+
 export default function ChatAgentRoute() {
+  const { user, chatAgentName } = useLoaderData<typeof loader>();
   const [input, setInput] = useState("");
-  const agent = useAgent({ agent: "ChatAgent" });
+  const agent = useAgent({ agent: "ChatAgent", name: chatAgentName });
   const {
     messages,
     sendMessage,
@@ -74,8 +83,8 @@ export default function ChatAgentRoute() {
                 LLM-backed Chat Agent
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-                This route connects to a separate Durable Object agent that
-                persists chat history and streams responses from Workers AI.
+                Signed in as {user.email}. This route connects to your private
+                Durable Object chat session and streams responses from Workers AI.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-sm">
@@ -90,6 +99,12 @@ export default function ChatAgentRoute() {
                 className="rounded-full border border-white/15 px-4 py-2 text-slate-100 transition hover:border-fuchsia-300/40 hover:bg-fuchsia-300/10"
               >
                 Counter demo
+              </Link>
+              <Link
+                to="/logout"
+                className="rounded-full border border-white/15 px-4 py-2 text-slate-100 transition hover:border-rose-300/40 hover:bg-rose-300/10"
+              >
+                Sign out
               </Link>
             </div>
           </div>

@@ -2,6 +2,10 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
   index("routes/home.tsx"),
+  route("login", "routes/login.tsx"),
+  route("logout", "routes/logout.ts"),
+  route("auth/google", "routes/auth.google.ts"),
+  route("auth/google/callback", "routes/auth.google.callback.ts"),
   route("counter", "routes/counter.tsx"),
   route("chat-agent", "routes/chat-agent.tsx"),
   route("test-ai-worker", "routes/test-ai-worker.tsx"),
