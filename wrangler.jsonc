@@ -7,7 +7,8 @@
   "main": "./workers/app.ts",
   "vars": {
     "AI_GATEWAY_ACCOUNT_ID": "c336fa03613cb6253dcdf6941872f343",
-    "AI_GATEWAY_ID": "default"
+    "AI_GATEWAY_ID": "default",
+    "ANTHROPIC_API_KEY": "rubii-anthropic"
   },
   "ai": {
     "binding": "AI"

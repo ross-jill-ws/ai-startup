@@ -53,7 +53,7 @@ export async function action({ request, context }: Route.ActionArgs) {
       headers: {
         "content-type": "application/json",
         accept: "text/event-stream",
-        "cf-aig-authorization": env.CF_AIG_TOKEN,
+        "cf-aig-authorization": formatGatewayAuthorization(env.CF_AIG_TOKEN),
       },
       body: JSON.stringify({
         model: MODEL,
@@ -76,6 +76,10 @@ export async function action({ request, context }: Route.ActionArgs) {
     status: upstream.status,
     headers,
   });
+}
+
+function formatGatewayAuthorization(token: string) {
+  return token.startsWith("Bearer ") ? token : `Bearer ${token}`;
 }
 
 function sanitizeMessages(input: unknown): GatewayMessage[] {

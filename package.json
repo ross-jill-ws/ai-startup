@@ -7,11 +7,13 @@
     "dev": "react-router dev",
     "deploy": "npm run build && wrangler deploy",
     "preview": "npm run build && vite preview",
+    "list-ai-models": "npx wrangler ai models",
     "typecheck": "npm run cf-typegen && react-router typegen && tsc -b",
     "cf-typegen": "wrangler types",
     "postinstall": "npm run cf-typegen"
   },
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.41",
     "@ai-sdk/react": "^3.0.170",
     "@cloudflare/ai-chat": "^0.5.2",
     "@react-router/cloudflare": "^7.14.1",

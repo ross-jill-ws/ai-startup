@@ -6,6 +6,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import agents from "agents/vite";
 
 export default defineConfig({
+  server: {
+    port: 5174,
+    strictPort: true,
+  },
   plugins: [
     agents(),
     cloudflare({ viteEnvironment: { name: "ssr" } }),
