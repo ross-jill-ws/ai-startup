@@ -20,11 +20,14 @@ import {
 
 type GatewayEnv = Env & {
   CF_AIG_TOKEN?: string;
+  OPENAI_API_KEY?: string;
   OPENAI_BYOK_ALIAS?: string;
   ANTHROPIC_API_KEY?: string;
   ANTHROPIC_BYOK_ALIAS?: string;
   GOOGLE_BYOK_ALIAS?: string;
+  GEMINI_API_KEY?: string;
   GEMINI_BYOK_ALIAS?: string;
+  DEEPSEEK_API_KEY?: string;
   DEEPSEEK_BYOK_ALIAS?: string;
 };
 
@@ -158,7 +161,9 @@ function getGatewayProviderAuth(env: Env, modelName: string): {
   if (provider === "openai") {
     return {
       provider,
-      providerHeaders: byokAliasHeaders(gatewayEnv.OPENAI_BYOK_ALIAS),
+      providerHeaders: byokAliasHeaders(
+        gatewayEnv.OPENAI_BYOK_ALIAS ?? gatewayEnv.OPENAI_API_KEY,
+      ),
     };
   }
 
@@ -178,7 +183,9 @@ function getGatewayProviderAuth(env: Env, modelName: string): {
     return {
       provider,
       providerHeaders: byokAliasHeaders(
-        gatewayEnv.GOOGLE_BYOK_ALIAS ?? gatewayEnv.GEMINI_BYOK_ALIAS,
+        gatewayEnv.GOOGLE_BYOK_ALIAS ??
+          gatewayEnv.GEMINI_BYOK_ALIAS ??
+          gatewayEnv.GEMINI_API_KEY,
       ),
     };
   }
@@ -186,7 +193,9 @@ function getGatewayProviderAuth(env: Env, modelName: string): {
   if (provider === "deepseek") {
     return {
       provider,
-      providerHeaders: byokAliasHeaders(gatewayEnv.DEEPSEEK_BYOK_ALIAS),
+      providerHeaders: byokAliasHeaders(
+        gatewayEnv.DEEPSEEK_BYOK_ALIAS ?? gatewayEnv.DEEPSEEK_API_KEY,
+      ),
     };
   }
 

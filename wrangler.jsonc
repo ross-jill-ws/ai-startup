@@ -8,7 +8,10 @@
   "vars": {
     "AI_GATEWAY_ACCOUNT_ID": "c336fa03613cb6253dcdf6941872f343",
     "AI_GATEWAY_ID": "default",
-    "ANTHROPIC_API_KEY": "rubii-anthropic"
+    "ANTHROPIC_API_KEY": "rubii-anthropic",
+    "OPENAI_API_KEY": "rubii-openai",
+    "GEMINI_API_KEY": "rubii-gemini",
+    "DEEPSEEK_API_KEY": "rubii-deepseek"
   },
   "ai": {
     "binding": "AI"
